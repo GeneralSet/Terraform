@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "web" {
-   image = "ubuntu-18-04-x64"
-   name = "web-1"
+resource "digitalocean_droplet" "multiplayer" {
+   image = "docker-18-04"
+   name = "multiplayer-1"
    region = "sfo2"
    size = "s-1vcpu-1gb"
 
