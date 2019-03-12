@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "frontend" {
         "Effect":"Allow",
         "Principal": "*",
         "Action":"s3:GetObject",
-        "Resource":["arn:aws:s3:::origin.generalset.io/*"
+        "Resource":["arn:aws:s3:::www.generalset.io/*"
         ]
     }]
 }
