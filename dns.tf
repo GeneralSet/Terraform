@@ -8,15 +8,15 @@ resource "ns1_record" "root" {
     domain = "${ns1_zone.tld.zone}"
     type   = "ALIAS"
     answers = {
-        answer = "${aws_s3_bucket.frontend.bucket_domain_name}"
+        answer = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
     }
 }
 resource "ns1_record" "www" {
     zone   = "${ns1_zone.tld.zone}"
     domain = "www.${ns1_zone.tld.zone}"
-    type   = "CNAME"
+    type   = "ALIAS"
     answers = {
-        answer = "${aws_s3_bucket.frontend.bucket_domain_name}"
+        answer = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
     }
 }
 
