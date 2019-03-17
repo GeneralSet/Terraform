@@ -10,8 +10,8 @@ export DO_KEY_ID={YOUR_DIGITAL_OCEAN_SHH_KEY_ID}
 export FINGERPRINT=$(ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub | awk '{print substr($2, 5)}')
 
 # https://console.aws.amazon.com/iam/home#/security_credentials
-export AWS_ACCESS={YOUR_PERSONAL_ACCESS_KEY}
-export AWS_SECRET={YOUR_PERSONAL_SECRET_KEY}
+export AWS_ACCESS_KEY_ID={YOUR_PERSONAL_ACCESS_KEY}
+export AWS_SECRET_ACCESS_KEY={YOUR_PERSONAL_SECRET_KEY}
 
 export NS1_APIKEY={ns1_apikey}
 ```
@@ -21,8 +21,8 @@ plan
 terraform plan \
   -var "do_token=${DO_PAT}" \
   -var "do_key_id=${DO_KEY_ID}" \
-  -var "aws_access_key=${AWS_ACCESS}" \
-  -var "aws_secret_key=${AWS_SECRET}" \
+  -var "aws_access_key=${AWS_ACCESS_KEY_ID}" \
+  -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}" \
   -var "ns1_apikey=${NS1_APIKEY}" \
   -var "ssh_fingerprint=${FINGERPRINT}" \
   -var "pub_key=$HOME/.ssh/id_rsa.pub" \
@@ -34,8 +34,8 @@ apply
 terraform apply \
   -var "do_token=${DO_PAT}" \
   -var "do_key_id=${DO_KEY_ID}" \
-  -var "aws_access_key=${AWS_ACCESS}" \
-  -var "aws_secret_key=${AWS_SECRET}" \
+  -var "aws_access_key=${AWS_ACCESS_KEY_ID}" \
+  -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}" \
   -var "ns1_apikey=${NS1_APIKEY}" \
   -var "ssh_fingerprint=${FINGERPRINT}" \
   -var "pub_key=$HOME/.ssh/id_rsa.pub" \
