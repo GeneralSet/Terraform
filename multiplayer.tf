@@ -11,13 +11,4 @@ resource "digitalocean_droplet" "multiplayer" {
     private_key = "${file(var.pvt_key)}"
     timeout = "2m"
   }
-
-  provisioner "remote-exec" {
-    inline = [
-      "export PATH=$PATH:/user/bin",
-      # install nginx
-      "sudo apt-get update",
-      "sudo apt-get -y install nginx"
-    ]
-  }
 }
