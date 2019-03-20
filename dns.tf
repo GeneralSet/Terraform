@@ -8,7 +8,7 @@ resource "ns1_record" "root" {
     domain = "${ns1_zone.tld.zone}"
     type   = "ALIAS"
     answers = {
-        answer = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
+        answer = "${aws_cloudfront_distribution.frontend_cdn.domain_name}"
     }
 }
 resource "ns1_record" "www" {
@@ -16,7 +16,7 @@ resource "ns1_record" "www" {
     domain = "www.${ns1_zone.tld.zone}"
     type   = "ALIAS"
     answers = {
-        answer = "${aws_s3_bucket.frontend.bucket}.${aws_s3_bucket.frontend.website_domain}"
+        answer = "${aws_s3_bucket.frontend_www.bucket}.${aws_s3_bucket.frontend_www.website_domain}"
     }
 }
 
