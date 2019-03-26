@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend_root" {
-  bucket = "generalset.io"
+  bucket = "generalset.io.bucket"
   acl    = "public-read"
   policy = <<POLICY
 {
@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "frontend_root" {
         "Effect":"Allow",
         "Principal": "*",
         "Action":"s3:GetObject",
-        "Resource":["arn:aws:s3:::generalset.io/*"
+        "Resource":["arn:aws:s3:::generalset.io.bucket/*"
         ]
     }]
 }
@@ -21,7 +21,7 @@ POLICY
 }
 
 resource "aws_s3_bucket" "frontend_www" {
-  bucket = "www.generalset.io"
+  bucket = "www.generalset.io.bucket"
 
   website {
     redirect_all_requests_to = "generalset.io"
@@ -69,6 +69,13 @@ resource "aws_cloudfront_distribution" "frontend_cdn" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = "${aws_acm_certificate.my-cert.arn}"
+    ssl_support_method = "sni-only"
   }
+}
+
+resource "aws_acm_certificate" "my-cert" {
+  certificate_body = "${acme_certificate.certificate.certificate_pem}"
+  certificate_chain = "${acme_certificate.certificate.issuer_pem}"
+  private_key = "${acme_certificate.certificate.private_key_pem}"
 }
